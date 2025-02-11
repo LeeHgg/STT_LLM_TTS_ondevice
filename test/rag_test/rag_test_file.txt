@@ -1,0 +1,27 @@
+## 기본 정보
+- 로봇 이름: 인디
+- 제어 가능 장비: 로봇 팔
+## 명령 프로토콜
+[CNC 통신 모듈을 통해 문 열림 명령을 보냄]​
+focas.open_door()
+-----
+[가이드 비주얼 트래킹 시작]
+eye.start_tracking()​
+indy.start_teleop()​
+obj_pose = eye.get_track_pos()​
+indy.movetelel_rel(obj_pose)
+-----
+[시편 인식]​
+obj_pose_list = eye.detect()
+-----
+[그리퍼로 3번째 시편을 피킹 후 들어올림]​
+target_obj_pose = obj_pose_list[2]​
+target_obj_pose_up = obj_pose_list[2][2] + 300 # Z-offset​
+indy.execute_tool(name="open_gripper")​
+indy.movel(target_obj_pose_up)​
+indy.movel(target_obj_pose)​
+indy.execute_tool(name="close_gripper")
+-----
+[작업 중단]
+indy.stop_motion()
+-----
