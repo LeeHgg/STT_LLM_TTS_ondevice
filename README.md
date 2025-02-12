@@ -19,7 +19,7 @@
 ```
 conda create -n voice-teach python=3.9
 conda activate voice-teach
-cd voiceTeaching
+cd STT_LLM_TTS_ondevice
 pip install -r requirements.txt
 ```
 
