@@ -122,7 +122,7 @@ https://ollama.com/
     ex)
     
     ```
-    ollama run deepseek-r1:671b
+    ollama run deepseek-r1:8b
     ```
     
 
