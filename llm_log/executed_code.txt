@@ -1,2 +1,179 @@
 
 print("focas.open_door()")
+eye.start_tracking()
+indy.start_teleop()
+obj_pose = eye.get_track_pos()
+indy.movetelel_rel(obj_pose)
+print("indy.start_direct()")
+
+print("focas.open_door()")
+
+print("eye.start_tracking()")
+print("indy.start_teleop()")
+print("obj_pose = eye.get_track_pos()")
+print("indy.movetelel_rel(obj_pose)")
+
+print("# [현재 동작 중지]")
+print("indy.stop_motion()")
+
+print("# [새로운 위치로 이동]")
+print("indy.movetelel_abs([300, 100, 50, 0, 0, 0])")
+
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+import utils.log
+utils.log.show_executed_code()
+
+print("#[CNC 통신 모듈을 통해 문 열림 명령을 보냄]")
+print("focas.open_door()")
+
+print("#[가이드 비주얼 트래킹 시작]")
+print("eye.start_tracking()")
+print("indy.start_teleop()")
+print("obj_pose = eye.get_track_pos()")
+print("indy.movetelel_rel(obj_pose)")
+
+print("#[시편 인식]")
+print("obj_pose_list = eye.detect()")
+
+print("#[그리퍼로 3번째 시편을 피킹 후 들어올림]")
+print("target_obj_pose = obj_pose_list[2]")
+print("target_obj_pose_up = obj_pose_list[2][2] + 300 # Z-offset")
+print("indy.execute_tool(name='open_gripper')")
+print("indy.movel(target_obj_pose_up)")
+print("indy.movel(target_obj_pose)")
+print("indy.execute_tool(name='close_gripper')")
+
+print("#[작업 중단]")
+print("indy.stop_motion()")
+
+print("focas.open_door()")
+
+print("eye.start_tracking()")
+print("indy.start_teleop()")
+print("obj_pose = eye.get_track_pos()")
+print("indy.movetelel_rel(obj_pose)")
+
+print("# [현재 동작 중지]")
+print("indy.stop_motion()")
+
+print("# [새로운 위치로 이동]")
+print("indy.movetelel_abs([300, 100, 50, 0, 0, 0])")
+
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+import utils.log
+utils.log.show_executed_code()
+
+print("#[CNC 통신 모듈을 통해 문 열림 명령을 보냄]")
+print("focas.open_door()")
+
+print("#[가이드 비주얼 트래킹 시작]")
+print("eye.start_tracking()")
+print("indy.start_teleop()")
+print("obj_pose = eye.get_track_pos()")
+print("indy.movetelel_rel(obj_pose)")
+
+print("#[시편 인식]")
+print("obj_pose_list = eye.detect()")
+
+print("#[그리퍼로 3번째 시편을 피킹 후 들어올림]")
+print("target_obj_pose = obj_pose_list[2]")
+print("target_obj_pose_up = obj_pose_list[2][2] + 300 # Z-offset")
+print("indy.execute_tool(name='open_gripper')")
+print("indy.movel(target_obj_pose_up)")
+print("indy.movel(target_obj_pose)")
+print("indy.execute_tool(name='close_gripper')")
+
+print("#[작업 중단]")
+print("indy.stop_motion()")
+
+print("focas.open_door()")
+
+print("eye.start_tracking()")
+print("indy.start_teleop()")
+print("obj_pose = eye.get_track_pos()")
+print("indy.movetelel_rel(obj_pose)")
+
+print("# [현재 동작 중지]")
+print("indy.stop_motion()")
+
+print("# [새로운 위치로 이동]")
+print("indy.movetelel_abs([300, 100, 50, 0, 0, 0])")
+
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+import utils.log
+utils.log.show_executed_code()
+
+print("#[CNC 통신 모듈을 통해 문 열림 명령을 보냄]")
+print("focas.open_door()")
+
+print("#[가이드 비주얼 트래킹 시작]")
+print("eye.start_tracking()")
+print("indy.start_teleop()")
+print("obj_pose = eye.get_track_pos()")
+print("indy.movetelel_rel(obj_pose)")
+
+print("#[시편 인식]")
+print("obj_pose_list = eye.detect()")
+
+print("#[그리퍼로 3번째 시편을 피킹 후 들어올림]")
+print("target_obj_pose = obj_pose_list[2]")
+print("target_obj_pose_up = obj_pose_list[2][2] + 300 # Z-offset")
+print("indy.execute_tool(name='open_gripper')")
+print("indy.movel(target_obj_pose_up)")
+print("indy.movel(target_obj_pose)")
+print("indy.execute_tool(name='close_gripper')")
+
+print("#[작업 중단]")
+print("indy.stop_motion()")
+print("indy.start_direct()")
+print("indy.add_joint/task_waypoint([30, 0, 0, 0, 0, 0])")
+print("indy.add_joint/task_waypoint([30, 0, 0, 0, 0, 0])")
+print("indy.start_direct()")
+
+print("eye.start_tracking()")
+print("indy.start_teleop()")
+print("obj_pose = eye.get_track_pos()")
+print("indy.movetelel_rel(obj_pose)")
+
+print("# [새로운 위치로 이동]")
+print("indy.movetelel_abs([300, 100, 50, 0, 0, 0])")
+
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+import utils.log
+utils.log.show_executed_code()
+print("# 경유점 설정")
+print("waypoints = []")
+print("for i in range(5):")
+print("    waypoint = input(f"경유점 {i+1}의 좌표를 입력하세요: ")")
+print("    waypoints.append(waypoint)")
+print("")
+print("# 경유점 저장")
+print("indy.add_joint/task_waypoint(waypoints)")
+
+print("focas.open_door()")
+print("eye.start_tracking()")
+print("indy.start_teleop()")
+print("obj_pose = eye.get_track_pos()")
+print("indy.movetelel_rel(obj_pose)")
+print("# 경유점 설정")
+print("waypoints = []")
+print("for i in range(5):")
+print("    waypoint = input(f"경유점 {i+1}의 좌표를 입력하세요: ")")
+print("    waypoints.append(waypoint)")
+print("")
+print("# 경유점 저장")
+print("indy.add_joint/task_waypoint(waypoints)")
+
+print("focas.open_door()")
+print("eye.start_tracking()")
+print("indy.start_teleop()")
+print("obj_pose = eye.get_track_pos()")
+print("indy.movetelel_rel(obj_pose)")

@@ -9,12 +9,16 @@ from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QTextEdit, QVBox
 from utils.audio import Audio_record, Custom_faster_whisper
 from utils.sLLM import Ollama_sLLM
 from utils.custom_tts import Custom_TTS
+from neuromeka import IndyDCP3
 import utils.log
+
+import warnings
+warnings.filterwarnings("ignore", category=FutureWarning)
 
 # 환경 변수 설정
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 
-class RobotAssistantGUI(QWidget):
+class RobotAssistant(QWidget):
     def __init__(self):
         super().__init__()
 
@@ -23,14 +27,14 @@ class RobotAssistantGUI(QWidget):
         self.stt_model = Custom_faster_whisper()
         self.stt_model.set_model('base')
         
-        self.llm = Ollama_sLLM(model_name='llama3-ko-8b-Q8', file_name="instruction.txt")
-        self.session_id = 'robot_'
+        self.llm = Ollama_sLLM(model_name='llama3-ko-8b-Q8', file_name="instruction_robot_data.txt")
+        self.session_id = 'robot_chat_123245'
         self.session_count = 0
         self.llm.set_session_id(self.session_id)
         
         self.tts_module = Custom_TTS()
         self.tts_module.set_model()
-        self.tts_module.get_reference_speaker(speaker_path='tts_model/sample_sunhi.mp3')  
+        self.tts_module.get_reference_speaker(speaker_path='tts_model/sample_sunhi.mp3')  # 여자 목소리
 
         # GUI 요소 설정
         self.initUI()
@@ -79,18 +83,42 @@ class RobotAssistantGUI(QWidget):
         self.text_input.setText(result_denoise)
         self.label.setText("음성 인식 완료")
 
+    def get_robot_info(self):
+        """로봇 상태 및 현재 위치 정보 가져오기"""
+        indy = IndyDCP3('192.168.10.210') 
+        control_data = indy.get_control_data() 
+        print(control_data)
+        op_state = control_data['op_state']
+        print(f"op_state: {op_state}")
+        if op_state == 5: 
+            robot_state = "일반 모드"
+        elif op_state == 17: 
+            robot_state = "원격 조작 모드"
+        else:
+            robot_state = f"알 수 없는 상태 ({op_state})"
+        robot_position = control_data['q']
+
+        return robot_state, robot_position
+
     def process_input(self):
         """LLM 실행"""
         user_input = self.text_input.text().strip()
         if not user_input:
             return
+        robot_state, robot_position = self.get_robot_info()
+        formatted_input = (
+            f"[사용자의 요청] {user_input}\n"
+            f"[현재 모드] {robot_state}\n"
+            f"[로봇의 q] {robot_position}"
+        )
+        print(formatted_input) 
 
         self.label.setText("AI 응답 중...")
-        response = self.llm.invoke(user_input, self.session_id)
+        response = self.llm.invoke(formatted_input, self.session_id)
         self.response_display.setText(response)
 
         # 코드 저장 및 실행
-        self.save_and_run_code(user_input, response)
+        self.save_and_run_code(formatted_input, response)
 
         self.label.setText("응답 완료")
 
@@ -136,18 +164,10 @@ class RobotAssistantGUI(QWidget):
                 print("\n실행 중 오류 발생\n", result.stderr)
         except Exception as e:
             print(f"실행 실패: {e}")
-    def remove_code_blocks(self, text):
-        """ ``` 코드 블록 제거 """
-        return re.sub(r'```.*?```', '', text, flags=re.DOTALL).strip()
 
     def run_tts(self):
         """TTS 실행"""
         response_text = self.response_display.toPlainText().strip()
-        
-        # 코드 블록 제거
-        response_text = self.remove_code_blocks(response_text)
-        print(f"response_text:{response_text}\n")
-
         if response_text:
             self.tts_module.make_speech(response_text)
 
@@ -171,6 +191,6 @@ class RobotAssistantGUI(QWidget):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    gui = RobotAssistantGUI()
+    gui = RobotAssistant()
     gui.show()
     sys.exit(app.exec_())

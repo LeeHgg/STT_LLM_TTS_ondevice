@@ -10,23 +10,23 @@ from langchain_core.messages import AIMessage
 
 
 class Ollama_sLLM:
-    def __init__(self, model_name):
+    def __init__(self, model_name, file_name):
         self.model = ChatOllama(model=model_name)
         self.store = {}
         self.with_message_history = RunnableWithMessageHistory(self.model, self._get_session_history)
         self.config_dic = {}
-        self.instruct = self._get_instruct()
+        self.instruct = self._get_instruct(filename=file_name)
         self.remove_word_list = ['[사용자 질문]', '[사용자 질문']
         print("모델 생성 완료")
 
-    def _get_instruct(self):
+    def _get_instruct(self, filename):
         '''
         LLM에 입력되는 인스트럭션 텍스트를 불러옴
         
         return : 인스트럭션 텍스트
         '''
-        print(f'Loaded in instruct/instruction.txt')
-        with open(f'instruct/instruction.txt', 'r', encoding='utf-8-sig') as f:
+        print(f'Loaded in instruct/{filename}')
+        with open(f'instruct/{filename}', 'r', encoding='utf-8-sig') as f:
             full_txt = f.read()
         return full_txt
 

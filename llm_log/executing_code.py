@@ -1,2 +1,15 @@
 
+print("# 경유점 설정")
+print("waypoints = []")
+print("for i in range(5):")
+print("    waypoint = input(f"경유점 {i+1}의 좌표를 입력하세요: ")")
+print("    waypoints.append(waypoint)")
+print("")
+print("# 경유점 저장")
+print("indy.add_joint/task_waypoint(waypoints)")
+
 print("focas.open_door()")
+print("eye.start_tracking()")
+print("indy.start_teleop()")
+print("obj_pose = eye.get_track_pos()")
+print("indy.movetelel_rel(obj_pose)")
