@@ -51,7 +51,7 @@ class Audio_record:
             self.record_thread.start()
     
     def _record_start(self):
-        '''VAD 감지 조건으로 녹음이 게속되는 내부 함수'''
+        '''VAD 감지 조건으로 녹음이 계속되는 내부 함수'''
         self.recording = True
         self.buffer = []
         no_voice_target_cnt = (self.vad_sec*1000) # 녹음 목표 초를 ms로 변환

@@ -25,16 +25,10 @@ class Ollama_sLLM:
         
         return : 인스트럭션 텍스트
         '''
-        # file_list = ['base', 'few_shot', 'informations'] # 순서대로 읽어드릴 텍스트 파일 이름들
-        file_list = ['informations']
-        path = 'instruct'
-        instruction_template = ''
-        for file in file_list:
-            print(f'Loaded in {path}/{file}.txt')
-            with open(f'{path}/{file}.txt', 'r', encoding='utf-8-sig') as f:
-                full_txt = f.read()
-            instruction_template = f'{instruction_template}\n{full_txt}'
-        return instruction_template
+        print(f'Loaded in instruct/instruction.txt')
+        with open(f'instruct/instruction.txt', 'r', encoding='utf-8-sig') as f:
+            full_txt = f.read()
+        return full_txt
 
     def set_session_id(self, session_id):
         '''
